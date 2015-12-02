@@ -1,5 +1,6 @@
 package com.twilio.phonetree.servlet.commuter;
 
+import com.twilio.phonetree.servlet.common.Redirect;
 import com.twilio.sdk.verbs.Dial;
 import com.twilio.sdk.verbs.TwiMLException;
 import com.twilio.sdk.verbs.TwiMLResponse;
@@ -25,12 +26,12 @@ public class ConnectServlet extends HttpServlet {
 
         TwiMLResponse twiMLResponse = null;
 
-        if (optionPhones.containsKey(selectedOption)) {
-            try {
-                twiMLResponse = dial(optionPhones.get(selectedOption));
-            } catch (TwiMLException e) {
-                e.printStackTrace();
-            }
+        try {
+            twiMLResponse = optionPhones.containsKey(selectedOption)
+                    ? dial(optionPhones.get(selectedOption))
+                    : Redirect.toMainMenu();
+        } catch (TwiMLException e) {
+            e.printStackTrace();
         }
 
         servletResponse.setContentType("text/xml");

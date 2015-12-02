@@ -5,6 +5,7 @@ import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.hamcrest.CoreMatchers;
 import org.jdom2.Document;
+import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.junit.Before;
 import org.junit.Test;
@@ -44,7 +45,8 @@ public class ConnectServletTest extends TwilioServletTest {
 
     @Test
     @Parameters({"2", "3", "4"})
-    public void whenSelectedOptionIs_2_3_4_ThenResponseContainsDial(String digits) throws IOException, JDOMException {
+    public void whenSelectedOptionIs_2_3_4_ThenResponseContainsDial(String digits)
+            throws IOException, JDOMException {
 
         when(request.getParameter("digits")).thenReturn(digits);
 
@@ -58,5 +60,25 @@ public class ConnectServletTest extends TwilioServletTest {
 
         assertThatContentTypeIsXML(response);
         assertThat(getElement(document, "Dial").getValue(), is(CoreMatchers.<String>notNullValue()));
+    }
+
+    @Test
+    @Parameters({"1", "5"})
+    public void whenSelectedOptionIsNot_2_3_4_ThenResponseRedirectsToWelcome(String digits)
+            throws IOException, JDOMException {
+
+        when(request.getParameter("digits")).thenReturn(digits);
+
+        ConnectServlet servlet = new ConnectServlet();
+        servlet.doPost(request, response);
+
+        printWriter.flush();
+        String content = new String(output.toByteArray(), "UTF-8");
+
+        Document document = getDocument(content);
+
+        assertThatContentTypeIsXML(response);
+        assertThat(getElement(document, "Dial"), is(CoreMatchers.<Element>nullValue()));
+        assertThat(getElement(document, "Redirect").getValue(), is("/ivr/welcome"));
     }
 }
