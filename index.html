@@ -1,0 +1,137 @@
+<!DOCTYPE html><html><head><title>IVR Phone Tree</title><style>body, html {
+  height:100%;
+  width:100%;
+  padding:0;
+  margin:0;
+  overflow:hidden;
+  background-color:#ddd;
+}
+.wrapper {
+  height:100%;
+  width:100%;
+}</style><link rel="shortcut icon" href="//twilio.com/bundles/marketing/img/favicons/favicon.ico"><link rel="apple-touch-icon" href="//twilio.com/bundles/marketing/img/favicons/favicon_57.png"><link rel="apple-touch-icon" sizes="72x72" href="//twilio.com/bundles/marketing/img/favicons/favicon_72.png"><link rel="apple-touch-icon" sizes="114x114" href="//twilio.com/bundles/marketing/img/favicons/favicon_114.png"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"><link rel="stylesheet" href="viewsaurus.css"></head><body><div class="wrapper"><div id="viewsaurus" data-title="IVR Phone Tree"><div class="saurus-panes"><div class="saurus-prose"><div class="saurus-prose-header"><div class="title-outer"><span class="step-title">IVR Phone Tree</span></div></div><div class="saurus-nav-buttons"><div class="saurus-nav-button nav-overview"><div class="saurus-nav-button-inner"><i class="fa fa-fw fa-list"></i></div><div class="nav-divider"></div></div><div class="saurus-nav-button nav-previous"><div class="saurus-nav-button-inner"><a href=""> <i class="fa fa-fw fa-play fa-rotate-180"></i></a></div><div class="nav-divider"></div></div><div class="saurus-nav-button nav-next clickable"><div class="saurus-nav-button-inner"><a href="#1"> <i class="fa fa-fw fa-play"></i></a></div></div><div class="saurus-next-title"><span class="next-title-inner"></span></div></div><div class="saurus-progress-bar"></div><div class="saurus-start"><p>IVRs (interactive voice response) are automated phone systems that can facilitate communication between callers and businesses. If you've ever dialed your credit card company to check on a balance after responding to a series of automated prompts, you've used an IVR. Learn how to build an IVR in minutes using Twilio's powerful TwiML API.</p><a href="#0">Start Tutorial</a></div><div class="saurus-content"><div data-title="IVR Phone Tree" class="chapter"><div data-file="src/main/webapp/WEB-INF/web.xml" data-mode="xml" class="step"><h2 id="about-this-application">About this application</h2>
+<p><img src="//howtodocs.s3.amazonaws.com/logo-et-phone2.png" alt="Extra Terrestrial Phone Home
+Service"></p>
+<p>This <a href="//docs.oracle.com/javaee/6/tutorial/doc/bnafd.html">Servlets</a> sample
+application is modeled after a typical call center experience, but with
+more <a href="//en.wikipedia.org/wiki/Reese%27s_Pieces#ET:_The_Extra-Terrestrial">Reese&#39;s
+Pieces</a>.</p>
+<p>Stranded aliens can call a phone number and receive instructions on how
+to get out of earth safely, or call their home planet
+directly<a href="//bit.ly/asogi">.</a> In this tutorial, we&#39;ll show you the
+key bits of code to make this work.</p>
+<p>To run this sample app yourself, <a href="//github.com/TwilioDevEd/ivr-phone-tree-
+servlets">download the code and follow the
+instructions on GitHub</a>.</p>
+<p>Let&#39;s get started! Click the right arrow above to move to the next step
+of the tutorial.</p>
+<hr>
+<p><strong>See Also:</strong></p>
+<ul>
+<li><a href="//docs.oracle.com/javaee/6/tutorial/doc/bnafd.html">Java Servlet Technology</a></li>
+<li><a href="//www.twilio.com/docs/java/install">The Twilio Java Helper Library</a></li>
+</ul>
+</div><div data-file="src/main/webapp/WEB-INF/web.xml" data-mode="xml" class="step"><h2 id="respond-to-the-phone-call">Respond to the Phone Call</h2>
+<p>To initiate the phone tree, we need to configure one of our Twilio
+numbers to send our web application an HTTP request when we
+get an incoming call.</p>
+<p><a href="//www.twilio.com/user/account/phone-numbers/incoming">Click on one of your
+numbers</a> and
+configure the Voice URL to point to our app. In our code the route
+will be <code>/ivr/welcome</code>.</p>
+<p><img src="//s3.amazonaws.com/howtodocs/number-
+config.png" alt="Configuring a Twilio Number"></p>
+<hr>
+<p><strong>See Also:</strong></p>
+<ul>
+<li><a href="//www.twilio.com/help/faq/voice/how-do-i-assign-my-twilio-number-to-my-voice-application">Configuring Twilio Numbers for Voice</a></li>
+<li><a href="//www.twilio.com/blog/2013/10/test-your-webhooks-locally-with-ngrok.html">Using ngrok to test your Twilio webhooks locally</a></li>
+</ul>
+</div><div data-file="src/main/java/com/twilio/phonetree/servlet/ivr/WelcomeServlet.java" data-highlight="15-41" class="step"><h2 id="respond-to-the-twilio-request-with-twiml">Respond to the Twilio request with TwiML</h2>
+<p>Our Twilio number is now configured to <a href="//www.twilio.com/docs/api/twiml/twilio_request">send HTTP
+requests</a> to this
+controller action on any incoming voice calls. Our app responds with
+<a href="//www.twilio.com/docs/api/twiml">TwiML</a> to tell Twilio what to do
+in response to the message.</p>
+<p>In this case we tell Twilio to
+<a href="//www.twilio.com/docs/api/twiml/gather"><code>Gather</code></a> the input from
+the caller and we <a href="//www.twilio.com/docs/api/twiml/play"><code>Play</code></a> a
+welcome message.</p>
+<hr>
+<p><strong>See Also:</strong></p>
+<ul>
+<li><a href="//www.twilio.com/docs/api/twiml/gather#attributes">Gather attributes</a></li>
+<li><a href="//www.twilio.com/docs/api/twiml/play#attributes-loop">Play &#39;loop&#39; attribute</a></li>
+</ul>
+</div><div data-file="src/main/java/com/twilio/phonetree/servlet/ivr/WelcomeServlet.java" data-highlight="20" class="step"><h2 id="where-to-send-the-caller-s-input">Where to send the caller&#39;s input</h2>
+<p>The <em>gather&#39;s</em> <code>action</code> parameter takes an absolute or relative URL as a
+value - in our case, the <code>/menu/show</code> route.</p>
+<p>When the caller has finished entering digits Twilio will make a
+GET or POST request to this URL including a
+<a href="//www.twilio.com/docs/api/twiml/gather#attributes-
+action-parameters"><code>Digits</code></a> parameter with the number our caller chose.</p>
+<p>After making this request, Twilio will continue the current call using
+the TwiML received in your response. Any TwiML verbs occuring after a
+<code>&lt;Gather&gt;</code> are unreachable, unless the caller enters no digits.</p>
+<hr>
+<p><strong>See Also:</strong></p>
+<ul>
+<li><a href="//www.twilio.com/docs/api/twiml/twilio_request#synchronous-request-parameters">Twilio Request parameters</a></li>
+</ul>
+</div><div data-file="src/main/java/com/twilio/phonetree/servlet/menu/ShowServlet.java" data-highlight="13-37" class="step"><h2 id="the-main-menu-process-the-caller-s-selection">The Main Menu: Process the caller&#39;s selection</h2>
+<p>This route handles processing the caller&#39;s input.</p>
+<p>If our caller chooses &#39;1&#39; for directions, we use a helper method defined
+below, <code>getReturnInstructions</code>, to respond with TwiML that will
+<a href="//www.twilio.com/docs/api/twiml/say"><code>Say</code></a> directions to our
+caller&#39;s extraction point.</p>
+<p>If the caller chooses &#39;2&#39; to call her home planet, then we need to
+gather more input from her. We&#39;ll cover this in the next step.</p>
+<p>If the caller enters anything else we respond with a TwiML
+<a href="//www.twilio.com/docs/api/twiml/redirect"><code>Redirect</code></a> to the main
+menu.</p>
+<hr>
+<p><strong>See Also:</strong></p>
+<ul>
+<li><a href="//www.twilio.com/docs/api/twiml/hangup">The TwiML Hangup verb</a></li>
+<li><a href="//www.twilio.com/docs/api/twiml/say#attributes-alice">TwiMl Say: Language Options</a></li>
+</ul>
+</div><div data-file="src/main/java/com/twilio/phonetree/servlet/menu/ShowServlet.java" data-highlight="26, 61-81" class="step"><h2 id="the-planet-directory-collect-more-input-from-the-caller">The Planet Directory: Collect more input from the caller</h2>
+<p>If our caller chooses to call her home planet we will tell her the planet
+directory. This is akin to a typical &quot;company directory&quot; feature of
+most IVRs.</p>
+<p>In our response we again use a <code>Gather</code> verb to receive our caller&#39;s
+input. The <code>action</code> verb points this time to the <code>planets</code> route, which
+will switch our response based on what the caller chooses.</p>
+<p>Let&#39;s look at that servlet next.</p>
+</div><div data-file="src/main/java/com/twilio/phonetree/servlet/commuter/ConnectServlet.java" data-highlight="17-47" class="step"><h2 id="the-planet-directory-connect-the-caller-to-another-number">The Planet Directory: Connect the caller to another number</h2>
+<p>In this servlet, we grab the caller&#39;s selection off the request and store
+it in a variable called <code>selectedOption</code>. We then use a
+<a href="https://www.twilio.com/docs/api/twiml/dial"><code>Dial</code></a> verb with
+the appropriate phone number to connect our caller to her home
+planet.</p>
+<p>The current numbers are hardcoded, but they could also be
+read from a database or from a file.</p>
+</div><div class="step"><h2 id="where-to-next-">Where to next?</h2>
+<p>That&#39;s it! We&#39;ve just implemented an IVR phone tree that will delight
+and serve your customers.</p>
+<p>If you&#39;re a Java developer working with Twilio, you might enjoy these
+other tutorials:</p>
+<p><a href="//www.twilio.com/docs/tutorials/walkthrough/automated-survey/java/spark"><strong>Automated Survey</strong></a>
+<em>(Spark)</em></p>
+<p>Instantly collect structured data from your users with a survey
+conducted over a voice call or SMS text messages.</p>
+<p><a href="https://www.twilio.com/docs/tutorials/walkthrough/click-to-call/java/servlets"><strong>Click-To-Call</strong></a>
+<em>(Servlets)</em></p>
+<p>Click-to-call enables your company to convert web traffic into phone calls
+with the click of a button.</p>
+<h3 id="did-this-help-">Did this help?</h3>
+<p>Thanks for checking out this tutorial! If you have any feedback to share
+with us, we&#39;d love to hear it. Tweet
+<a href="//twitter.com/twilio">@twilio</a> to let us know what you think.</p>
+</div></div>
+<div class="saurus-files" style="display:none;"><textarea class="saurus-file" data-file="src/main/webapp/WEB-INF/web.xml" data-mode="xml">PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KCjx3ZWItYXBwIHhtbG5zPSJodHRwOi8vamF2YS5zdW4uY29tL3htbC9ucy9qYXZhZWUiCiAgICAgICAgIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiCiAgICAgICAgIHhzaTpzY2hlbWFMb2NhdGlvbj0iaHR0cDovL2phdmEuc3VuLmNvbS94bWwvbnMvamF2YWVlIGh0dHA6Ly9qYXZhLnN1bi5jb20veG1sL25zL2phdmFlZS93ZWItYXBwXzNfMC54c2QiCiAgICAgICAgIHZlcnNpb249IjMuMCI+CiAgICA8d2VsY29tZS1maWxlLWxpc3Q+CiAgICAgICAgPHdlbGNvbWUtZmlsZT5ob21lLmh0bWw8L3dlbGNvbWUtZmlsZT4KICAgIDwvd2VsY29tZS1maWxlLWxpc3Q+CiAgICA8c2VydmxldD4KICAgICAgICA8c2VydmxldC1uYW1lPml2ci13ZWxjb21lPC9zZXJ2bGV0LW5hbWU+CiAgICAgICAgPHNlcnZsZXQtY2xhc3M+Y29tLnR3aWxpby5waG9uZXRyZWUuc2VydmxldC5pdnIuV2VsY29tZVNlcnZsZXQ8L3NlcnZsZXQtY2xhc3M+CiAgICA8L3NlcnZsZXQ+CiAgICA8c2VydmxldD4KICAgICAgICA8c2VydmxldC1uYW1lPm1lbnUtc2hvdzwvc2VydmxldC1uYW1lPgogICAgICAgIDxzZXJ2bGV0LWNsYXNzPmNvbS50d2lsaW8ucGhvbmV0cmVlLnNlcnZsZXQubWVudS5TaG93U2VydmxldDwvc2VydmxldC1jbGFzcz4KICAgIDwvc2VydmxldD4KICAgIDxzZXJ2bGV0PgogICAgICAgIDxzZXJ2bGV0LW5hbWU+Y29tbXV0ZXItY29ubmVjdDwvc2VydmxldC1uYW1lPgogICAgICAgIDxzZXJ2bGV0LWNsYXNzPmNvbS50d2lsaW8ucGhvbmV0cmVlLnNlcnZsZXQuY29tbXV0ZXIuQ29ubmVjdFNlcnZsZXQ8L3NlcnZsZXQtY2xhc3M+CiAgICA8L3NlcnZsZXQ+CgogICAgPHNlcnZsZXQtbWFwcGluZz4KICAgICAgICA8c2VydmxldC1uYW1lPml2ci13ZWxjb21lPC9zZXJ2bGV0LW5hbWU+CiAgICAgICAgPHVybC1wYXR0ZXJuPi9pdnIvd2VsY29tZTwvdXJsLXBhdHRlcm4+CiAgICA8L3NlcnZsZXQtbWFwcGluZz4KICAgIDxzZXJ2bGV0LW1hcHBpbmc+CiAgICAgICAgPHNlcnZsZXQtbmFtZT5tZW51LXNob3c8L3NlcnZsZXQtbmFtZT4KICAgICAgICA8dXJsLXBhdHRlcm4+L21lbnUvc2hvdzwvdXJsLXBhdHRlcm4+CiAgICA8L3NlcnZsZXQtbWFwcGluZz4KICAgIDxzZXJ2bGV0LW1hcHBpbmc+CiAgICAgICAgPHNlcnZsZXQtbmFtZT5jb21tdXRlci1jb25uZWN0PC9zZXJ2bGV0LW5hbWU+CiAgICAgICAgPHVybC1wYXR0ZXJuPi9jb21tdXRlci9jb25uZWN0PC91cmwtcGF0dGVybj4KICAgIDwvc2VydmxldC1tYXBwaW5nPgo8L3dlYi1hcHA+Cg==</textarea>
+<textarea class="saurus-file" data-file="src/main/java/com/twilio/phonetree/servlet/ivr/WelcomeServlet.java" data-mode="java">cGFja2FnZSBjb20udHdpbGlvLnBob25ldHJlZS5zZXJ2bGV0Lml2cjsKCmltcG9ydCBjb20udHdpbGlvLnNkay52ZXJicy5HYXRoZXI7CmltcG9ydCBjb20udHdpbGlvLnNkay52ZXJicy5QbGF5OwppbXBvcnQgY29tLnR3aWxpby5zZGsudmVyYnMuVHdpTUxFeGNlcHRpb247CmltcG9ydCBjb20udHdpbGlvLnNkay52ZXJicy5Ud2lNTFJlc3BvbnNlOwoKaW1wb3J0IGphdmF4LnNlcnZsZXQuaHR0cC5IdHRwU2VydmxldDsKaW1wb3J0IGphdmF4LnNlcnZsZXQuaHR0cC5IdHRwU2VydmxldFJlcXVlc3Q7CmltcG9ydCBqYXZheC5zZXJ2bGV0Lmh0dHAuSHR0cFNlcnZsZXRSZXNwb25zZTsKaW1wb3J0IGphdmEuaW8uSU9FeGNlcHRpb247CgpwdWJsaWMgY2xhc3MgV2VsY29tZVNlcnZsZXQgZXh0ZW5kcyBIdHRwU2VydmxldCB7CgogICAgQE92ZXJyaWRlCiAgICBwcm90ZWN0ZWQgdm9pZCBkb1Bvc3QoSHR0cFNlcnZsZXRSZXF1ZXN0IHNlcnZsZXRSZXF1ZXN0LCBIdHRwU2VydmxldFJlc3BvbnNlIHNlcnZsZXRSZXNwb25zZSkKICAgICAgICAgICAgdGhyb3dzIElPRXhjZXB0aW9uIHsKCiAgICAgICAgR2F0aGVyIGdhdGhlciA9IG5ldyBHYXRoZXIoKTsKICAgICAgICBnYXRoZXIuc2V0QWN0aW9uKCIvbWVudS9zaG93Iik7CiAgICAgICAgZ2F0aGVyLnNldE51bURpZ2l0cygxKTsKCiAgICAgICAgUGxheSBwbGF5ID0gbmV3IFBsYXkoImh0dHA6Ly9ob3d0b2RvY3MuczMuYW1hem9uYXdzLmNvbS9ldC1waG9uZS5tcDMiKTsKICAgICAgICBwbGF5LnNldExvb3AoMyk7CgogICAgICAgIHRyeSB7CiAgICAgICAgICAgIGdhdGhlci5hcHBlbmQocGxheSk7CiAgICAgICAgfSBjYXRjaCAoVHdpTUxFeGNlcHRpb24gZSkgewogICAgICAgICAgICBlLnByaW50U3RhY2tUcmFjZSgpOwogICAgICAgIH0KCiAgICAgICAgVHdpTUxSZXNwb25zZSB0d2lNTFJlc3BvbnNlID0gbmV3IFR3aU1MUmVzcG9uc2UoKTsKICAgICAgICB0cnkgewogICAgICAgICAgICB0d2lNTFJlc3BvbnNlLmFwcGVuZChnYXRoZXIpOwogICAgICAgIH0gY2F0Y2ggKFR3aU1MRXhjZXB0aW9uIGUpIHsKICAgICAgICAgICAgZS5wcmludFN0YWNrVHJhY2UoKTsKICAgICAgICB9CgogICAgICAgIHNlcnZsZXRSZXNwb25zZS5zZXRDb250ZW50VHlwZSgidGV4dC94bWwiKTsKICAgICAgICBzZXJ2bGV0UmVzcG9uc2UuZ2V0V3JpdGVyKCkud3JpdGUodHdpTUxSZXNwb25zZS50b1hNTCgpKTsKICAgIH0KfQo=</textarea>
+<textarea class="saurus-file" data-file="src/main/java/com/twilio/phonetree/servlet/menu/ShowServlet.java" data-mode="java">cGFja2FnZSBjb20udHdpbGlvLnBob25ldHJlZS5zZXJ2bGV0Lm1lbnU7CgoKaW1wb3J0IGNvbS50d2lsaW8uc2RrLnZlcmJzLio7CgppbXBvcnQgamF2YXguc2VydmxldC5odHRwLkh0dHBTZXJ2bGV0OwppbXBvcnQgamF2YXguc2VydmxldC5odHRwLkh0dHBTZXJ2bGV0UmVxdWVzdDsKaW1wb3J0IGphdmF4LnNlcnZsZXQuaHR0cC5IdHRwU2VydmxldFJlc3BvbnNlOwppbXBvcnQgamF2YS5pby5JT0V4Y2VwdGlvbjsKCnB1YmxpYyBjbGFzcyBTaG93U2VydmxldCBleHRlbmRzIEh0dHBTZXJ2bGV0IHsKCiAgICBAT3ZlcnJpZGUKICAgIHByb3RlY3RlZCB2b2lkIGRvUG9zdChIdHRwU2VydmxldFJlcXVlc3Qgc2VydmxldFJlcXVlc3QsIEh0dHBTZXJ2bGV0UmVzcG9uc2Ugc2VydmxldFJlc3BvbnNlKQogICAgICAgICAgICB0aHJvd3MgSU9FeGNlcHRpb24gewoKICAgICAgICBTdHJpbmcgc2VsZWN0ZWRPcHRpb24gPSBzZXJ2bGV0UmVxdWVzdC5nZXRQYXJhbWV0ZXIoIkRpZ2l0cyIpOwoKICAgICAgICBUd2lNTFJlc3BvbnNlIHR3aU1MUmVzcG9uc2UgPSBudWxsOwogICAgICAgIHRyeSB7CiAgICAgICAgICAgIHN3aXRjaCAoc2VsZWN0ZWRPcHRpb24pIHsKICAgICAgICAgICAgICAgIGNhc2UgIjEiOgogICAgICAgICAgICAgICAgICAgIHR3aU1MUmVzcG9uc2UgPSBnZXRSZXR1cm5JbnN0cnVjdGlvbnMoKTsKICAgICAgICAgICAgICAgICAgICBicmVhazsKICAgICAgICAgICAgICAgIGNhc2UgIjIiOgogICAgICAgICAgICAgICAgICAgIHR3aU1MUmVzcG9uc2UgPSBnZXRQbGFuZXRzKCk7CiAgICAgICAgICAgICAgICAgICAgYnJlYWs7CiAgICAgICAgICAgICAgICBkZWZhdWx0OgogICAgICAgICAgICAgICAgICAgIHR3aU1MUmVzcG9uc2UgPSBjb20udHdpbGlvLnBob25ldHJlZS5zZXJ2bGV0LmNvbW1vbi5SZWRpcmVjdC50b01haW5NZW51KCk7CiAgICAgICAgICAgIH0KICAgICAgICB9IGNhdGNoIChUd2lNTEV4Y2VwdGlvbiBlKSB7CiAgICAgICAgICAgIGUucHJpbnRTdGFja1RyYWNlKCk7CiAgICAgICAgfQoKICAgICAgICBzZXJ2bGV0UmVzcG9uc2Uuc2V0Q29udGVudFR5cGUoInRleHQveG1sIik7CiAgICAgICAgc2VydmxldFJlc3BvbnNlLmdldFdyaXRlcigpLndyaXRlKHR3aU1MUmVzcG9uc2UudG9YTUwoKSk7CiAgICB9CgogICAgcHJpdmF0ZSBUd2lNTFJlc3BvbnNlIGdldFJldHVybkluc3RydWN0aW9ucygpIHRocm93cyBUd2lNTEV4Y2VwdGlvbiB7CgogICAgICAgIFR3aU1MUmVzcG9uc2UgcmVzcG9uc2UgPSBuZXcgVHdpTUxSZXNwb25zZSgpOwogICAgICAgIFNheSBmaXJzdFBocmFzZSA9IG5ldyBTYXkoCiAgICAgICAgICAgICAgICAiVG8gZ2V0IHRvIHlvdXIgZXh0cmFjdGlvbiBwb2ludCwgZ2V0IG9uIHlvdXIgYmlrZSBhbmQgZ28gZG93biAiICsKICAgICAgICAgICAgICAgICJ0aGUgc3RyZWV0LiBUaGVuIExlZnQgZG93biBhbiBhbGxleS4gQXZvaWQgdGhlIHBvbGljZSBjYXJzLiBUdXJuIGxlZnQgIiArCiAgICAgICAgICAgICAgICAiaW50byBhbiB1bmZpbmlzaGVkIGhvdXNpbmcgZGV2ZWxvcG1lbnQuIEZseSBvdmVyIHRoZSByb2FkYmxvY2suIEdvICIgKwogICAgICAgICAgICAgICAgInBhc3NlZCB0aGUgbW9vbi4gU29vbiBhZnRlciB5b3Ugd2lsbCBzZWUgeW91ciBtb3RoZXIgc2hpcC4iKTsKICAgICAgICBmaXJzdFBocmFzZS5zZXRMYW5ndWFnZSgiYWxpY2UiKTsKICAgICAgICBmaXJzdFBocmFzZS5zZXRMYW5ndWFnZSgiZW4tR0IiKTsKCiAgICAgICAgU2F5IHNlY29uZFBocmFzZSA9IG5ldyBTYXkoCiAgICAgICAgICAgICAgICAiVGhhbmsgeW91IGZvciBjYWxsaW5nIHRoZSBFVCBQaG9uZSBIb21lIFNlcnZpY2UgLSB0aGUgIiArCiAgICAgICAgICAgICAgICAiYWR2ZW50dXJvdXMgYWxpZW4ncyBmaXJzdCBjaG9pY2UgaW4gaW50ZXJnYWxhY3RpYyB0cmF2ZWwiKTsKCiAgICAgICAgcmVzcG9uc2UuYXBwZW5kKGZpcnN0UGhyYXNlKTsKICAgICAgICByZXNwb25zZS5hcHBlbmQoc2Vjb25kUGhyYXNlKTsKICAgICAgICByZXNwb25zZS5hcHBlbmQobmV3IEhhbmd1cCgpKTsKCiAgICAgICAgcmV0dXJuIHJlc3BvbnNlOwogICAgfQoKICAgIHByaXZhdGUgVHdpTUxSZXNwb25zZSBnZXRQbGFuZXRzKCkgdGhyb3dzIFR3aU1MRXhjZXB0aW9uIHsKCiAgICAgICAgR2F0aGVyIGdhdGhlciA9IG5ldyBHYXRoZXIoKTsKICAgICAgICBnYXRoZXIuc2V0QWN0aW9uKCIvY29tbXV0ZXIvY29ubmVjdCIpOwogICAgICAgIGdhdGhlci5zZXROdW1EaWdpdHMoMSk7CgogICAgICAgIFNheSBwaHJhc2UgPSBuZXcgU2F5KAogICAgICAgICAgICAgICAgIlRvIGNhbGwgdGhlIHBsYW5ldCBCcm9oIGRvZSBBcyBPIEcsIHByZXNzIDIuIFRvIGNhbGwgdGhlIHBsYW5ldCAiICsKICAgICAgICAgICAgICAgICJEdWhHbyBiYWgsIHByZXNzIDMuIFRvIGNhbGwgYW4gb29iZXIgYXN0ZXJvaWQgdG8geW91ciBsb2NhdGlvbiwgcHJlc3MgNC4gVG8gIiArCiAgICAgICAgICAgICAgICAiZ28gYmFjayB0byB0aGUgbWFpbiBtZW51LCBwcmVzcyB0aGUgc3RhciBrZXkgIik7CiAgICAgICAgcGhyYXNlLnNldFZvaWNlKCJhbGljZSIpOwogICAgICAgIHBocmFzZS5zZXRMYW5ndWFnZSgiZW4tR0IiKTsKICAgICAgICBwaHJhc2Uuc2V0TG9vcCgzKTsKCiAgICAgICAgZ2F0aGVyLmFwcGVuZChwaHJhc2UpOwoKICAgICAgICBUd2lNTFJlc3BvbnNlIHJlc3BvbnNlID0gbmV3IFR3aU1MUmVzcG9uc2UoKTsKICAgICAgICByZXNwb25zZS5hcHBlbmQoZ2F0aGVyKTsKCiAgICAgICAgcmV0dXJuIHJlc3BvbnNlOwogICAgfQp9Cg==</textarea>
+<textarea class="saurus-file" data-file="src/main/java/com/twilio/phonetree/servlet/commuter/ConnectServlet.java" data-mode="java">cGFja2FnZSBjb20udHdpbGlvLnBob25ldHJlZS5zZXJ2bGV0LmNvbW11dGVyOwoKaW1wb3J0IGNvbS50d2lsaW8ucGhvbmV0cmVlLnNlcnZsZXQuY29tbW9uLlJlZGlyZWN0OwppbXBvcnQgY29tLnR3aWxpby5zZGsudmVyYnMuRGlhbDsKaW1wb3J0IGNvbS50d2lsaW8uc2RrLnZlcmJzLlR3aU1MRXhjZXB0aW9uOwppbXBvcnQgY29tLnR3aWxpby5zZGsudmVyYnMuVHdpTUxSZXNwb25zZTsKCmltcG9ydCBqYXZheC5zZXJ2bGV0Lmh0dHAuSHR0cFNlcnZsZXQ7CmltcG9ydCBqYXZheC5zZXJ2bGV0Lmh0dHAuSHR0cFNlcnZsZXRSZXF1ZXN0OwppbXBvcnQgamF2YXguc2VydmxldC5odHRwLkh0dHBTZXJ2bGV0UmVzcG9uc2U7CmltcG9ydCBqYXZhLmlvLklPRXhjZXB0aW9uOwppbXBvcnQgamF2YS51dGlsLkhhc2hNYXA7CmltcG9ydCBqYXZhLnV0aWwuTWFwOwoKcHVibGljIGNsYXNzIENvbm5lY3RTZXJ2bGV0IGV4dGVuZHMgSHR0cFNlcnZsZXQgewoKICAgIEBPdmVycmlkZQogICAgcHJvdGVjdGVkIHZvaWQgZG9Qb3N0KEh0dHBTZXJ2bGV0UmVxdWVzdCBzZXJ2bGV0UmVxdWVzdCwgSHR0cFNlcnZsZXRSZXNwb25zZSBzZXJ2bGV0UmVzcG9uc2UpCiAgICAgICAgICAgIHRocm93cyBJT0V4Y2VwdGlvbiB7CgogICAgICAgIFN0cmluZyBzZWxlY3RlZE9wdGlvbiA9IHNlcnZsZXRSZXF1ZXN0LmdldFBhcmFtZXRlcigiRGlnaXRzIik7CiAgICAgICAgTWFwPFN0cmluZywgU3RyaW5nPiBvcHRpb25QaG9uZXMgPSBuZXcgSGFzaE1hcDw+KCk7CiAgICAgICAgb3B0aW9uUGhvbmVzLnB1dCgiMiIsICIrMTIwMjQxNzMzNzgiKTsKICAgICAgICBvcHRpb25QaG9uZXMucHV0KCIzIiwgIisxMjAyNzMzNjM4NiIpOwogICAgICAgIG9wdGlvblBob25lcy5wdXQoIjQiLCAiKzEyMDI3MzM2NjM3Iik7CgogICAgICAgIFR3aU1MUmVzcG9uc2UgdHdpTUxSZXNwb25zZSA9IG51bGw7CgogICAgICAgIHRyeSB7CiAgICAgICAgICAgIHR3aU1MUmVzcG9uc2UgPSBvcHRpb25QaG9uZXMuY29udGFpbnNLZXkoc2VsZWN0ZWRPcHRpb24pCiAgICAgICAgICAgICAgICAgICAgPyBkaWFsKG9wdGlvblBob25lcy5nZXQoc2VsZWN0ZWRPcHRpb24pKQogICAgICAgICAgICAgICAgICAgIDogUmVkaXJlY3QudG9NYWluTWVudSgpOwogICAgICAgIH0gY2F0Y2ggKFR3aU1MRXhjZXB0aW9uIGUpIHsKICAgICAgICAgICAgZS5wcmludFN0YWNrVHJhY2UoKTsKICAgICAgICB9CgogICAgICAgIHNlcnZsZXRSZXNwb25zZS5zZXRDb250ZW50VHlwZSgidGV4dC94bWwiKTsKICAgICAgICBzZXJ2bGV0UmVzcG9uc2UuZ2V0V3JpdGVyKCkud3JpdGUodHdpTUxSZXNwb25zZS50b1hNTCgpKTsKICAgIH0KCiAgICBwcml2YXRlIFR3aU1MUmVzcG9uc2UgZGlhbChTdHJpbmcgcGhvbmVOdW1iZXIpIHRocm93cyBUd2lNTEV4Y2VwdGlvbiB7CgogICAgICAgIFR3aU1MUmVzcG9uc2UgcmVzcG9uc2UgPSBuZXcgVHdpTUxSZXNwb25zZSgpOwogICAgICAgIHJlc3BvbnNlLmFwcGVuZChuZXcgRGlhbChwaG9uZU51bWJlcikpOwoKICAgICAgICByZXR1cm4gcmVzcG9uc2U7CiAgICB9Cn0K</textarea>
+</div>
+</div><div class="saurus-overview"><ul></ul></div></div><div class="saurus-code"><div class="file-path"><span class="crumb-container"></span><i class="fa fa-fw fa-folder"></i></div><div class="saurus-editor"></div></div><div class="saurus-explorer"><div class="saurus-file-list"></div><a href="https://github.com/TwilioDevEd/ivr-phone-tree-servlets" target="_blank" class="explorer-get-code"> <i class="fa fa-lg fa-github-square"> </i>View Code on GitHub</a></div></div></div></div><script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script><script src="ace/ace.js"></script><script src="ace/theme-monokai.js"></script><script src="viewsaurus.js"></script></body></html>
