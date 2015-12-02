@@ -1,5 +1,6 @@
 package com.twilio.phonetree.servlet.menu;
 
+import com.twilio.phonetree.servlet.common.*;
 import com.twilio.sdk.verbs.*;
 
 import javax.servlet.http.HttpServlet;
@@ -24,6 +25,8 @@ public class ShowServlet extends HttpServlet {
                 case "2":
                     twiMLResponse = getPlanets();
                     break;
+                default:
+                    twiMLResponse = com.twilio.phonetree.servlet.common.Redirect.toMainMenu();
             }
         } catch (TwiMLException e) {
             e.printStackTrace();
@@ -58,7 +61,7 @@ public class ShowServlet extends HttpServlet {
     private TwiMLResponse getPlanets() throws TwiMLException {
 
         Gather gather = new Gather();
-        gather.setAction("/");
+        gather.setAction("/commuter/connect");
         gather.setNumDigits(1);
 
         Say phrase = new Say(

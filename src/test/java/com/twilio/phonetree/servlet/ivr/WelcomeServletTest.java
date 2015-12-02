@@ -45,7 +45,7 @@ public class WelcomeServletTest extends TwilioServletTest {
         Document document = getDocument(content);
 
         assertThatContentTypeIsXML(response);
-        assertThat(getAttributeValue(document, "Gather", "action"), is(equalTo("/")));
+        assertThat(getAttributeValue(document, "Gather", "action"), is(equalTo("/menu/show")));
         assertThat(getElement(document, "Gather/Play").getValue(), is(CoreMatchers.<String>notNullValue()));
     }
 }
