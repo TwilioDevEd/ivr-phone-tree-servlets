@@ -9,7 +9,7 @@
     </welcome-file-list>
     <servlet>
         <servlet-name>example</servlet-name>
-        <servlet-class>org.example.webapp.ExampleServlet</servlet-class>
+        <servlet-class>com.twilio.phonetree.IVRWelcomeServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
