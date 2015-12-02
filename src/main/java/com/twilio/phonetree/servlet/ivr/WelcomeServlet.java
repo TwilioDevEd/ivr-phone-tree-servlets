@@ -1,4 +1,4 @@
-package com.twilio.phonetree;
+package com.twilio.phonetree.servlet.ivr;
 
 import com.twilio.sdk.verbs.Gather;
 import com.twilio.sdk.verbs.Play;
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class IVRWelcomeServlet extends HttpServlet {
+public class WelcomeServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest servletRequest, HttpServletResponse servletResponse)

@@ -1,5 +1,6 @@
-package com.twilio.phonetree;
+package com.twilio.phonetree.servlet.ivr;
 
+import com.twilio.phonetree.TwilioServletTest;
 import org.hamcrest.CoreMatchers;
 import org.jdom2.Document;
 import org.junit.Before;
@@ -17,13 +18,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.when;
 
-public class IVRWelcomeServletTest extends TwilioServletTest {
+public class WelcomeServletTest extends TwilioServletTest {
 
-    @Mock
-    HttpServletRequest request;
+    @Mock HttpServletRequest request;
 
-    @Mock
-    HttpServletResponse response;
+    @Mock HttpServletResponse response;
 
     @Before
     public void setUp() {
@@ -37,7 +36,7 @@ public class IVRWelcomeServletTest extends TwilioServletTest {
         PrintWriter printWriter = new PrintWriter(output);
         when(response.getWriter()).thenReturn(printWriter);
 
-        IVRWelcomeServlet servlet = new IVRWelcomeServlet();
+        WelcomeServlet servlet = new WelcomeServlet();
         servlet.doPost(request, response);
 
         printWriter.flush();
