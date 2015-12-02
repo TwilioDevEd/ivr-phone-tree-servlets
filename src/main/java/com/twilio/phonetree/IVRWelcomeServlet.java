@@ -13,7 +13,7 @@ import java.io.IOException;
 public class IVRWelcomeServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest servletRequest, HttpServletResponse servletResponse)
+    protected void doPost(HttpServletRequest servletRequest, HttpServletResponse servletResponse)
             throws IOException {
 
         Gather gather = new Gather();

@@ -8,12 +8,12 @@
         <welcome-file>home.html</welcome-file>
     </welcome-file-list>
     <servlet>
-        <servlet-name>example</servlet-name>
+        <servlet-name>ivr-welcome</servlet-name>
         <servlet-class>com.twilio.phonetree.IVRWelcomeServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>example</servlet-name>
-        <url-pattern>/example</url-pattern>
+        <servlet-name>ivr-welcome</servlet-name>
+        <url-pattern>/ivr/welcome</url-pattern>
     </servlet-mapping>
 </web-app>
