@@ -1,6 +1,6 @@
 package com.twilio.phonetree.servlet.menu;
 
-import com.twilio.phonetree.servlet.common.*;
+
 import com.twilio.sdk.verbs.*;
 
 import javax.servlet.http.HttpServlet;
@@ -14,7 +14,7 @@ public class ShowServlet extends HttpServlet {
     protected void doPost(HttpServletRequest servletRequest, HttpServletResponse servletResponse)
             throws IOException {
 
-        String selectedOption = servletRequest.getParameter("digits");
+        String selectedOption = servletRequest.getParameter("Digits");
 
         TwiMLResponse twiMLResponse = null;
         try {

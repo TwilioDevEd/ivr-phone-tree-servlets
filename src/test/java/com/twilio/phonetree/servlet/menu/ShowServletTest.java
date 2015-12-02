@@ -48,7 +48,7 @@ public class ShowServletTest extends TwilioServletTest {
     @Test
     public void whenSelectedOptionIs_1_ThenResponseContainsSayAndHangup() throws IOException, JDOMException {
 
-        when(request.getParameter("digits")).thenReturn("1");
+        when(request.getParameter("Digits")).thenReturn("1");
 
         ShowServlet servlet = new ShowServlet();
         servlet.doPost(request, response);
@@ -66,7 +66,7 @@ public class ShowServletTest extends TwilioServletTest {
     @Test
     public void whenSelectedOptionIs_2_ThenResponseContainsGatherAndSay() throws IOException, JDOMException {
 
-        when(request.getParameter("digits")).thenReturn("2");
+        when(request.getParameter("Digits")).thenReturn("2");
 
         ShowServlet servlet = new ShowServlet();
         servlet.doPost(request, response);
@@ -86,7 +86,7 @@ public class ShowServletTest extends TwilioServletTest {
     public void whenSelectedOptionIsNot_1_2_ThenResponseRedirectsToWelcome(String digits)
             throws IOException, JDOMException {
 
-        when(request.getParameter("digits")).thenReturn(digits);
+        when(request.getParameter("Digits")).thenReturn(digits);
 
         ShowServlet servlet = new ShowServlet();
         servlet.doPost(request, response);

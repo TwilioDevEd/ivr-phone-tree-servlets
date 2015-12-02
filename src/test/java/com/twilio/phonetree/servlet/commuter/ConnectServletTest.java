@@ -48,7 +48,7 @@ public class ConnectServletTest extends TwilioServletTest {
     public void whenSelectedOptionIs_2_3_4_ThenResponseContainsDial(String digits)
             throws IOException, JDOMException {
 
-        when(request.getParameter("digits")).thenReturn(digits);
+        when(request.getParameter("Digits")).thenReturn(digits);
 
         ConnectServlet servlet = new ConnectServlet();
         servlet.doPost(request, response);
@@ -67,7 +67,7 @@ public class ConnectServletTest extends TwilioServletTest {
     public void whenSelectedOptionIsNot_2_3_4_ThenResponseRedirectsToWelcome(String digits)
             throws IOException, JDOMException {
 
-        when(request.getParameter("digits")).thenReturn(digits);
+        when(request.getParameter("Digits")).thenReturn(digits);
 
         ConnectServlet servlet = new ConnectServlet();
         servlet.doPost(request, response);

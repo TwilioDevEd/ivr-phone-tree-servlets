@@ -18,7 +18,7 @@ public class ConnectServlet extends HttpServlet {
     protected void doPost(HttpServletRequest servletRequest, HttpServletResponse servletResponse)
             throws IOException {
 
-        String selectedOption = servletRequest.getParameter("digits");
+        String selectedOption = servletRequest.getParameter("Digits");
         Map<String, String> optionPhones = new HashMap<>();
         optionPhones.put("2", "+12024173378");
         optionPhones.put("3", "+12027336386");
