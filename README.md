@@ -8,13 +8,13 @@ An example application implementing an automated phone line using Twilio.
 
 1. Clone this repository and `cd` into its directory:
    ```bash
-   $ git git@github.com:TwilioDevEd/ivr-phone-tree-servlets.git
+   $ git clone git@github.com:TwilioDevEd/ivr-phone-tree-servlets.git
    $ cd ivr-phone-tree-servlets
    ```
 
 2. Run the application.
    ```bash
-   $ ./gradew jettyRun
+   $ ./gradlew jettyRun
    ```
 
 3. Check it out at [http://localhost:8080](http://localhost:8080)
