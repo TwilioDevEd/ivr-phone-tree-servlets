@@ -4,6 +4,8 @@
 
 An example application implementing an automated phone line using Twilio.
 
+[Read the full tutorial here](https://www.twilio.com/docs/tutorials/walkthrough/ivr-phone-tree/java/servlets)!
+
 ## Local Development
 
 1. Clone this repository and `cd` into its directory:
