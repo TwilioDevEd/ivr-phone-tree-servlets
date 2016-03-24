@@ -104,7 +104,7 @@ input. The <code>action</code> verb points this time to the <code>planets</code>
 will switch our response based on what the caller chooses.</p>
 <p>Let&#39;s look at that servlet next.</p>
 </div><div data-file="src/main/java/com/twilio/phonetree/servlet/commuter/ConnectServlet.java" data-highlight="17-47" class="step"><h2 id="the-planet-directory-connect-the-caller-to-another-number">The Planet Directory: Connect the caller to another number</h2>
-<p>In this servlet, we grab the caller&#39;s selection off the request and store
+<p>In this servlet, we grab the caller&#39;s selection from the request and store
 it in a variable called <code>selectedOption</code>. We then use a
 <a href="https://www.twilio.com/docs/api/twiml/dial"><code>Dial</code></a> verb with
 the appropriate phone number to connect our caller to her home
