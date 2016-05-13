@@ -44,7 +44,7 @@ public class ShowServlet extends HttpServlet {
                 "the street. Then Left down an alley. Avoid the police cars. Turn left " +
                 "into an unfinished housing development. Fly over the roadblock. Go " +
                 "passed the moon. Soon after you will see your mother ship.");
-        firstPhrase.setLanguage("alice");
+        firstPhrase.setVoice("alice");
         firstPhrase.setLanguage("en-GB");
 
         Say secondPhrase = new Say(
