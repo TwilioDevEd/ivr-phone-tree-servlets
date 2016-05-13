@@ -26,7 +26,7 @@ This is an application example implementing an automated phone line using Twilio
 4. Expose the application to the wider Internet using [ngrok](https://ngrok.com/).
 
    ```bash
-   $ ngrok 8000 http
+   $ ngrok http 8080
    ```
    
 5. Provision a number under the
