@@ -1,14 +1,19 @@
-# IVR Phone Tree: IVR for beginners. Powered by Twilio - Servlets
+<a href="https://www.twilio.com">
+  <img src="https://static0.twilio.com/marketing/bundles/marketing/img/logos/wordmark-red.svg" alt="Twilio" width="250" />
+</a>
+
+# IVR Phone Tree: IVR for beginners. Powered by Twilio - Java/Servlets
 
 [![Build Status](https://travis-ci.org/TwilioDevEd/ivr-phone-tree-servlets.svg?branch=master)](https://travis-ci.org/TwilioDevEd/ivr-phone-tree-servlets)
 
-This is an application example implementing an automated phone line using Twilio.
+This is an application example implementing an automated phone line using Twilio
+and Java Servlets.
 
 [Read the full tutorial here](https://www.twilio.com/docs/tutorials/walkthrough/ivr-phone-tree/java/servlets)!
 
 ## Local Development
 
-1. Clone this repository and `cd` into it.
+1. First clone this repository and `cd` into it.
 
    ```bash
    $ git clone git@github.com:TwilioDevEd/ivr-phone-tree-servlets.git
@@ -29,14 +34,20 @@ This is an application example implementing an automated phone line using Twilio
    $ ngrok http 8080
    ```
    
-5. Provision a number under the
-   [Manage Numbers page](https://www.twilio.com/user/account/phone-numbers/incoming)
-   on your account. Set the voice URL for the number to
-   `http://<your-ngrok-subdomain>.ngrok.io/ivr/welcome`.
+1. Configure Twilio to call your webhooks
+
+  You will also need to configure Twilio to call your application when calls are
+  received in your [*Twilio Number*](https://www.twilio.com/user/account/messaging/phone-numbers).
+  The voice URL should look something like this:
+
+  ```
+  http://<your-ngrok-subdomain>.ngrok.io/ivr/welcome
+  ```
+
+  ![Configure Voice](http://howtodocs.s3.amazonaws.com/twilio-number-config-all-med.gif)
 
 6. Grab your phone and call your newly-provisioned number!
 
-That's it!
 
 ## Meta
 
