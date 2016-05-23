@@ -87,7 +87,7 @@
       action-parameters) parameter with the number our caller chose.
 
       After making this request, Twilio will continue the current call using
-      the TwiML received in your response. Any TwiML verbs occuring after a
+      the TwiML received in your response. Any TwiML verbs occurring after a
       `<Gather>` are unreachable, unless the caller enters no digits.
 
       ---
@@ -129,7 +129,7 @@
       directory. This is similar to a typical "company directory" feature of
       most IVRs.
 
-      In our response we use a `Gather` verb to receive our caller's
+      In our TwiML response we again use a `Gather` verb to receive our caller's
       input. The `action` verb points this time to the `planets` route, which
       will switch our response based on what the caller chooses.
 
@@ -146,7 +146,7 @@
       the appropriate phone number to connect our caller to her home
       planet.
 
-      The current numbers are hardcoded, but they could also be
+      The current numbers are hard coded, but they could also be
       read from a database or from a file.
 
   .step
@@ -174,5 +174,5 @@
       ### Did this help?
 
       Thanks for checking this tutorial out! If you have any feedback to share
-      with us, we'd love to hear it. Tweet
-      [@twilio](//twitter.com/twilio) to let us know what you think.
+      with us, we'd love to hear it. [Contact the Twilio Developer Education
+      Team](mailto:deved-oss@twilio.com) to let us know what you think.
