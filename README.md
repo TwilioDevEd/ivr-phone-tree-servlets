@@ -26,14 +26,14 @@ and Java Servlets.
    $ ./gradlew jettyRun
    ```
 
-3. Check it out at [http://localhost:8080](http://localhost:8080)
+3. Check it out at [http://localhost:8080](http://localhost:8080).
 
 4. Expose the application to the wider Internet using [ngrok](https://ngrok.com/).
 
    ```bash
    $ ngrok http 8080
    ```
-   
+
 1. Configure Twilio to call your webhooks
 
   You will also need to configure Twilio to call your application when calls are
