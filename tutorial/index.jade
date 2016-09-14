@@ -52,7 +52,7 @@
       * [Using ngrok to test your Twilio webhooks locally](//www.twilio.com/blog/2013/10/test-your-webhooks-locally-with-ngrok.html)
 
   .step(data-file='src/main/java/com/twilio/phonetree/servlet/ivr/WelcomeServlet.java',
-  data-highlight='15-41')
+  data-highlight='15-34')
     :markdown
       ## Responding to the Twilio request with TwiML
 
@@ -97,9 +97,9 @@
 
   .step(
     data-file='src/main/java/com/twilio/phonetree/servlet/menu/ShowServlet.java',
-    data-highlight='13-37')
+    data-highlight='17-41')
     :markdown
-      ## The Main Menu: Processing the caller's selection
+      ## The Main Menu: Processing the Caller's Selection
 
       If our caller chooses '1' for directions, we use a helper method defined
       below, `getReturnInstructions`, to respond with TwiML that will
@@ -123,7 +123,7 @@
     data-file='src/main/java/com/twilio/phonetree/servlet/menu/ShowServlet.java',
     data-highlight='26, 61-81')
     :markdown
-      ## The Planet's Directory: Collect more input from the caller
+      ## The Planet's Directory: Collect More Input from the Caller
 
       If our caller chooses to call her home planet we will tell her the planet
       directory. This is similar to a typical "company directory" feature of
@@ -135,10 +135,9 @@
 
       Let's look at that servlet next.
 
-  .step(data-file='src/main/java/com/twilio/phonetree/servlet/commuter/ConnectServlet.java',
-  data-highlight='17-47')
+  .step(data-file='src/main/java/com/twilio/phonetree/servlet/commuter/ConnectServlet.java')
     :markdown
-      ## The Planet's Directory: Connect the caller to another number
+      ## The Planet's Directory: Connect the Caller to Another Number
 
       In this servlet, we grab the caller's selection from the request and store
       it in a variable called `selectedOption`. We then use a
@@ -151,7 +150,7 @@
 
   .step
     :markdown
-      ## Where to next?
+      ## Where to Next?
 
       That's it! We've just implemented an IVR phone tree that will delight
       and serve your customers.
