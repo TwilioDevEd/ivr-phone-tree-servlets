@@ -1,22 +1,25 @@
 package com.twilio.phonetree.servlet.common;
 
-import com.twilio.sdk.verbs.Say;
-import com.twilio.sdk.verbs.TwiMLException;
-import com.twilio.sdk.verbs.TwiMLResponse;
+import com.twilio.twiml.Say;
+import com.twilio.twiml.VoiceResponse;
 
-public class Redirect {
+public final class Redirect {
 
-    public static TwiMLResponse toMainMenu() throws TwiMLException {
+    private Redirect() {
+        // To prevent instantiation.
+    }
 
-        Say say = new Say("Returning to the main menu");
-        say.setVoice("alice");
-        say.setLanguage("en-GB");
+    public static VoiceResponse toMainMenu() {
 
-        TwiMLResponse response = new TwiMLResponse();
-
-        response.append(say);
-        response.append(new com.twilio.sdk.verbs.Redirect("/ivr/welcome"));
+        VoiceResponse response = new VoiceResponse.Builder()
+                .say(new Say.Builder("Returning to the main menu")
+                        .voice(Say.Voice.ALICE)
+                        .language(Say.Language.EN_GB)
+                        .build())
+                .redirect(new com.twilio.twiml.Redirect.Builder().url("/irv/welcome").build())
+                .build();
 
         return response;
     }
 }
+

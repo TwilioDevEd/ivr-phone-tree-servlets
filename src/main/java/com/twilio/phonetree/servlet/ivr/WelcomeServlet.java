@@ -1,9 +1,9 @@
 package com.twilio.phonetree.servlet.ivr;
 
-import com.twilio.sdk.verbs.Gather;
-import com.twilio.sdk.verbs.Play;
-import com.twilio.sdk.verbs.TwiMLException;
-import com.twilio.sdk.verbs.TwiMLResponse;
+import com.twilio.twiml.Gather;
+import com.twilio.twiml.Play;
+import com.twilio.twiml.TwiMLException;
+import com.twilio.twiml.VoiceResponse;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,28 +15,22 @@ public class WelcomeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest servletRequest, HttpServletResponse servletResponse)
             throws IOException {
-
-        Gather gather = new Gather();
-        gather.setAction("/menu/show");
-        gather.setNumDigits(1);
-
-        Play play = new Play("http://howtodocs.s3.amazonaws.com/et-phone.mp3");
-        play.setLoop(3);
-
-        try {
-            gather.append(play);
-        } catch (TwiMLException e) {
-            e.printStackTrace();
-        }
-
-        TwiMLResponse twiMLResponse = new TwiMLResponse();
-        try {
-            twiMLResponse.append(gather);
-        } catch (TwiMLException e) {
-            e.printStackTrace();
-        }
+        VoiceResponse response = new VoiceResponse.Builder()
+                .gather(new Gather.Builder()
+                        .action("/menu/show")
+                        .numDigits(1)
+                        .build())
+                .play(new Play.Builder("http://howtodocs.s3.amazonaws.com/et-phone.mp3")
+                        .loop(3)
+                        .build())
+                .build();
 
         servletResponse.setContentType("text/xml");
-        servletResponse.getWriter().write(twiMLResponse.toXML());
+        try {
+            servletResponse.getWriter().write(response.toXml());
+        } catch (TwiMLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
+
