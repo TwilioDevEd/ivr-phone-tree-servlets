@@ -1,103 +1,104 @@
 package com.twilio.phonetree.servlet.menu;
 
-import com.twilio.phonetree.TwilioServletTest;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
-import org.hamcrest.CoreMatchers;
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.JDOMException;
+import org.custommonkey.xmlunit.XMLUnit;
+import org.custommonkey.xmlunit.XpathEngine;
+import org.custommonkey.xmlunit.exceptions.XpathException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.StringWriter;
 
+import static com.twilio.phonetree.ContentTypeVerifier.verifyThatContentTypeIsXml;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.when;
 
 @RunWith(JUnitParamsRunner.class)
-public class ShowServletTest extends TwilioServletTest {
+public class ShowServletTest {
 
-    @Mock HttpServletRequest request;
+    @Mock private HttpServletRequest request;
 
-    @Mock HttpServletResponse response;
+    @Mock private HttpServletResponse response;
 
-    ByteArrayOutputStream output;
+    private StringWriter stringWriter;
 
-    PrintWriter printWriter;
+    private PrintWriter printWriter;
+
+    private XpathEngine eng = XMLUnit.newXpathEngine();
 
     @Before
     public void setUp() throws IOException {
         MockitoAnnotations.initMocks(this);
 
-        output = new ByteArrayOutputStream();
-        printWriter = new PrintWriter(output);
+        stringWriter = new StringWriter();
+        printWriter = new PrintWriter(stringWriter);
         when(response.getWriter()).thenReturn(printWriter);
     }
 
     @Test
-    public void whenSelectedOptionIs_1_ThenResponseContainsSayAndHangup() throws IOException, JDOMException {
+    public void whenSelectedOptionIs1ThenResponseContainsSayAndHangup()
+            throws IOException, SAXException, XpathException {
 
         when(request.getParameter("Digits")).thenReturn("1");
 
         ShowServlet servlet = new ShowServlet();
         servlet.doPost(request, response);
 
-        printWriter.flush();
-        String content = new String(output.toByteArray(), "UTF-8");
+        Document doc = XMLUnit.buildControlDocument(stringWriter.toString());
 
-        Document document = getDocument(content);
-
-        assertThatContentTypeIsXML(response);
-        assertThat(getElement(document, "Say").getValue(), is(CoreMatchers.<String>notNullValue()));
-        assertThat(getElement(document, "Hangup").getValue(), is(CoreMatchers.<String>notNullValue()));
+        verifyThatContentTypeIsXml(response);
+        assertThat(eng.evaluate("/Response/Say/text()", doc),
+                containsString("your extraction point"));
+        assertThat(eng.evaluate("/Response/Hangup", doc), is(notNullValue()));
     }
 
     @Test
-    public void whenSelectedOptionIs_2_ThenResponseContainsGatherAndSay() throws IOException, JDOMException {
+    public void whenSelectedOptionIs2ThenResponseContainsGatherAndSay()
+            throws IOException, XpathException, SAXException {
 
         when(request.getParameter("Digits")).thenReturn("2");
 
         ShowServlet servlet = new ShowServlet();
         servlet.doPost(request, response);
 
-        printWriter.flush();
-        String content = new String(output.toByteArray(), "UTF-8");
+        Document doc = XMLUnit.buildControlDocument(stringWriter.toString());
 
-        Document document = getDocument(content);
-
-        assertThatContentTypeIsXML(response);
-        assertThat(getElement(document, "Gather/Say").getValue(), is(CoreMatchers.<String>notNullValue()));
-        assertThat(getAttributeValue(document, "Gather", "action"), is(equalTo("/commuter/connect")));
+        verifyThatContentTypeIsXml(response);
+        assertThat(eng.evaluate("/Response/Say/text()", doc),
+                containsString("call the planet Broh"));
+        assertThat(eng.evaluate("/Response/Gather/@action", doc),
+                is(equalTo("/commuter/connect")));
     }
 
     @Test
     @Parameters({"3", "4"})
-    public void whenSelectedOptionIsNot_1_2_ThenResponseRedirectsToWelcome(String digits)
-            throws IOException, JDOMException {
+    public void whenSelectedOptionIsNot1or2ThenResponseRedirectsToWelcome(String digits)
+            throws IOException, SAXException, XpathException {
 
         when(request.getParameter("Digits")).thenReturn(digits);
 
         ShowServlet servlet = new ShowServlet();
         servlet.doPost(request, response);
 
-        printWriter.flush();
-        String content = new String(output.toByteArray(), "UTF-8");
+        Document doc = XMLUnit.buildControlDocument(stringWriter.toString());
 
-        Document document = getDocument(content);
-
-        assertThatContentTypeIsXML(response);
-        assertThat(getElement(document, "Dial"), is(CoreMatchers.<Element>nullValue()));
-        assertThat(getElement(document, "Redirect").getValue(), is("/ivr/welcome"));
+        verifyThatContentTypeIsXml(response);
+        assertThat(eng.evaluate("/Response/Dial", doc), is(equalTo("")));
+        assertThat(eng.evaluate("/Response/Redirect", doc), is(equalTo("/irv/welcome")));
     }
 }
+
