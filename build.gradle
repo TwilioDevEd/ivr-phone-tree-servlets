@@ -1,17 +1,29 @@
 plugins {
     id 'java'
-    id 'jetty'
     id 'checkstyle'
 }
+
+apply plugin: 'war'
+apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
 
 checkstyle {
     toolVersion = "6.1.1"
 }
 
+gretty {
+    httpPort = 8080
+    contextPath = ''
+    logbackConfigFile = "src/main/resources/logback.xml"
+    servletContainer = "jetty9"
+}
+
 group 'com.twilio.phonetree'
 version '1.0'
 
-jettyRun.contextPath = '';
+configurations {
+    runtime.exclude group: "commons-logging", module: "commons-logging"
+    runtime.exclude group: "org.slf4j", module: "slf4j-simple"
+}
 
 repositories {
     mavenCentral()
@@ -20,7 +32,9 @@ repositories {
 dependencies {
     providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
 
-    compile 'com.twilio.sdk:twilio:7.0.0-rc-29'
+    compile 'com.twilio.sdk:twilio:7.7.0'
+    compile 'ch.qos.logback:logback-classic:1.2.2'
+    compile 'ch.qos.logback:logback-access:1.2.2'
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.hamcrest:hamcrest-library:1.3'

@@ -23,7 +23,7 @@ and Java Servlets.
 2. Run the application.
 
    ```bash
-   $ ./gradlew jettyRun
+   $ ./gradlew appRun
    ```
 
 3. Check it out at [http://localhost:8080](http://localhost:8080).
