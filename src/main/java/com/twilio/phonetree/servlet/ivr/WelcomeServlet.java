@@ -15,8 +15,8 @@ public class WelcomeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest servletRequest, HttpServletResponse servletResponse)
             throws IOException {
-        String mp3file = "https://raw.githubusercontent.com/TwilioDevEd/" +
-                "ivr-phone-tree-servlets/master/et-phone.mp3";
+        String mp3file = "https://raw.githubusercontent.com/TwilioDevEd/"
+                + "ivr-phone-tree-servlets/master/et-phone.mp3";
         VoiceResponse response = new VoiceResponse.Builder()
                 .gather(new Gather.Builder()
                         .action("/menu/show")

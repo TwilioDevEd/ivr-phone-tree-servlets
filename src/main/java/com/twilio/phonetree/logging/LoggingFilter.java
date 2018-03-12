@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -32,8 +35,8 @@ public class LoggingFilter implements Filter {
         chain.doFilter(request, response);
 
         if (!(request instanceof HttpServletRequest && response instanceof HttpServletResponse)) {
-            logger.warn("Couldn't log the request as the request/response" +
-                    " are not of the expected type");
+            logger.warn("Couldn't log the request as the request/response"
+                    + " are not of the expected type");
             return;
         }
 
