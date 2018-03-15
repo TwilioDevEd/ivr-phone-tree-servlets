@@ -3,20 +3,28 @@ package com.twilio.phonetree.logging;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.*;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static ch.qos.logback.access.AccessConstants.LB_INPUT_BUFFER;
 import static ch.qos.logback.access.AccessConstants.LB_OUTPUT_BUFFER;
 
-public class LoggingFilter implements Filter{
+public class LoggingFilter implements Filter {
     private static final String TEMPLATE_WITH_BODY =
             "\nRequest {} {} {} HEADERS:[{}] BODY: {}\nResponse {} HEADERS: [{}] BODY: {} ";
     private static final String TEMPLATE_WITH_NO_BODY =
@@ -24,18 +32,23 @@ public class LoggingFilter implements Filter{
     private static Logger logger = LoggerFactory.getLogger(LoggingFilter.class);
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
-        StatusExposingServletResponse response = new StatusExposingServletResponse((HttpServletResponse)servletResponse);
+    public void doFilter(ServletRequest request,
+                         ServletResponse servletResponse,
+                         FilterChain chain) throws IOException, ServletException {
+        StatusExposingServletResponse response =
+                new StatusExposingServletResponse((HttpServletResponse) servletResponse);
         chain.doFilter(request, response);
 
-        if(!(request instanceof HttpServletRequest && response instanceof HttpServletResponse)) {
-            logger.warn("Couldn't log the request as the request/response are not of the expected type");
+        if (!(request instanceof HttpServletRequest && response instanceof HttpServletResponse)) {
+            logger.warn("Couldn't log the request as the request/response"
+                    + " are not of the expected type");
             return;
         }
 
         HttpServletRequest httpRequest = (HttpServletRequest) request;
 
-        String requestHeaderString = buildHeadersString(Collections.list(httpRequest.getHeaderNames()),
+        String requestHeaderString = buildHeadersString(
+                Collections.list(httpRequest.getHeaderNames()),
                 n -> httpRequest.getHeader(n));
         String responseHeaderString = response.getHeaderMap().entrySet().stream()
                 .map(e -> e.getKey() + ": " + e.getValue())
@@ -43,7 +56,7 @@ public class LoggingFilter implements Filter{
 
         String template;
         Object[] params;
-        if(logger.isDebugEnabled()) {
+        if (logger.isDebugEnabled()) {
             byte[] requestBody = (byte[]) request.getAttribute(LB_INPUT_BUFFER);
             byte[] responseBody = (byte[]) request.getAttribute(LB_OUTPUT_BUFFER);
 
@@ -76,7 +89,8 @@ public class LoggingFilter implements Filter{
         return requestBody != null ? new String(requestBody, Charset.defaultCharset()) : "";
     }
 
-    private String buildHeadersString(Collection<String> headers, Function<String, String> getHeader) {
+    private String buildHeadersString(Collection<String> headers,
+                                      Function<String, String> getHeader) {
         return headers
                 .stream()
                 .map(h -> h + ":" + getHeader.apply(h))

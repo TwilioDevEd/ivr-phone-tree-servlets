@@ -44,7 +44,7 @@ and Java Servlets.
   http://<your-ngrok-subdomain>.ngrok.io/ivr/welcome
   ```
 
-  ![Configure Voice](http://howtodocs.s3.amazonaws.com/twilio-number-config-all-med.gif)
+  ![Configure Voice](https://s3.amazonaws.com/com.twilio.prod.twilio-docs/images/ivr-webhook.width-800.png)
 
 6. Grab your phone and call your newly-provisioned number!
 
