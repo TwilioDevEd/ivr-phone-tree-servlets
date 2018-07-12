@@ -1,7 +1,7 @@
 package com.twilio.phonetree.servlet.ivr;
 
 import com.twilio.twiml.Gather;
-import com.twilio.twiml.Play;
+import com.twilio.twiml.Say;
 import com.twilio.twiml.TwiMLException;
 import com.twilio.twiml.VoiceResponse;
 
@@ -15,14 +15,15 @@ public class WelcomeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest servletRequest, HttpServletResponse servletResponse)
             throws IOException {
-        String mp3file = "https://raw.githubusercontent.com/TwilioDevEd/"
-                + "ivr-phone-tree-servlets/master/et-phone.mp3";
         VoiceResponse response = new VoiceResponse.Builder()
                 .gather(new Gather.Builder()
                         .action("/menu/show")
                         .numDigits(1)
                         .build())
-                .play(new Play.Builder(mp3file)
+                .say(new Say.Builder(
+                        "Thanks for calling the E T Phone Home Service. "
+                        + "Please press 1 for directions."
+                        + "Press 2 for a list of planets to call.")
                         .loop(3)
                         .build())
                 .build();
