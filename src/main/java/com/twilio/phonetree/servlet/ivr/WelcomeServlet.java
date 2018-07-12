@@ -21,7 +21,8 @@ public class WelcomeServlet extends HttpServlet {
                         .numDigits(1)
                         .build())
                 .say(new Say.Builder(
-                        "Thanks for calling the E T Phone Home Service. Please press 1 for directions."
+                        "Thanks for calling the E T Phone Home Service. "
+                        + "Please press 1 for directions."
                         + "Press 2 for a list of planets to call.")
                         .loop(3)
                         .build())
