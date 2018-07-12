@@ -20,7 +20,7 @@ public class WelcomeServlet extends HttpServlet {
                         .action("/menu/show")
                         .numDigits(1)
                         .build())
-                .play(new Say.Builder(
+                .say(new Say.Builder(
                         "Thanks for calling the E T Phone Home Service. Please press 1 for directions."
                         + "Press 2 for a list of planets to call.")
                         .loop(3)
