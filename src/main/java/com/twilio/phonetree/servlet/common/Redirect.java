@@ -1,7 +1,7 @@
 package com.twilio.phonetree.servlet.common;
 
-import com.twilio.twiml.Say;
 import com.twilio.twiml.VoiceResponse;
+import com.twilio.twiml.voice.Say;
 
 public final class Redirect {
 
@@ -16,7 +16,7 @@ public final class Redirect {
                         .voice(Say.Voice.ALICE)
                         .language(Say.Language.EN_GB)
                         .build())
-                .redirect(new com.twilio.twiml.Redirect.Builder().url("/irv/welcome").build())
+                .redirect(new com.twilio.twiml.voice.Redirect.Builder("/irv/welcome").build())
                 .build();
 
         return response;

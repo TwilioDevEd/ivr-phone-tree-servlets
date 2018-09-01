@@ -1,9 +1,9 @@
 package com.twilio.phonetree.servlet.ivr;
 
-import com.twilio.twiml.Gather;
-import com.twilio.twiml.Play;
 import com.twilio.twiml.TwiMLException;
 import com.twilio.twiml.VoiceResponse;
+import com.twilio.twiml.voice.Gather;
+import com.twilio.twiml.voice.Play;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

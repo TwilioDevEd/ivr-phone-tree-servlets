@@ -1,11 +1,11 @@
 package com.twilio.phonetree.servlet.menu;
 
 
-import com.twilio.twiml.Gather;
-import com.twilio.twiml.Hangup;
-import com.twilio.twiml.Say;
 import com.twilio.twiml.TwiMLException;
 import com.twilio.twiml.VoiceResponse;
+import com.twilio.twiml.voice.Gather;
+import com.twilio.twiml.voice.Hangup;
+import com.twilio.twiml.voice.Say;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -55,7 +55,7 @@ public class ShowServlet extends HttpServlet {
                         "Thank you for calling the ET Phone Home Service - the "
                         + "adventurous alien's first choice in intergalactic travel")
                         .build())
-                .hangup(new Hangup())
+                .hangup(new Hangup.Builder().build())
                 .build();
 
         return response;
