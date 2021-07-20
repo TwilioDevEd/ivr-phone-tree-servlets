@@ -34,7 +34,7 @@ dependencies {
 
     compile 'com.twilio.sdk:twilio:7.7.0'
     compile 'ch.qos.logback:logback-classic:1.2.2'
-    compile 'ch.qos.logback:logback-access:1.2.2'
+    compile 'ch.qos.logback:logback-access:1.2.4'
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.hamcrest:hamcrest-library:1.3'
