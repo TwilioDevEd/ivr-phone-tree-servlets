@@ -4,7 +4,7 @@
 
 # IVR Phone Tree: IVR for beginners. Powered by Twilio - Java/Servlets
 
-[![Build Status](https://travis-ci.org/TwilioDevEd/ivr-phone-tree-servlets.svg?branch=master)](https://travis-ci.org/TwilioDevEd/ivr-phone-tree-servlets)
+[![Java Servlet CI](https://github.com/TwilioDevEd/ivr-phone-tree-servlets/actions/workflows/gradle.yml/badge.svg)](https://github.com/TwilioDevEd/ivr-phone-tree-servlets/actions/workflows/gradle.yml)
 
 This is an application example implementing an automated phone line using Twilio
 and Java Servlets.
