@@ -21,9 +21,9 @@ public class ConnectServlet extends HttpServlet {
 
         String selectedOption = servletRequest.getParameter("Digits");
         Map<String, String> optionPhones = new HashMap<>();
-        optionPhones.put("2", "+12024173378");
-        optionPhones.put("3", "+12027336386");
-        optionPhones.put("4", "+12027336637");
+        optionPhones.put("2", "+19295566487");
+        optionPhones.put("3", "+17262043675");
+        optionPhones.put("4", "+16513582243");
 
         VoiceResponse twiMLResponse = optionPhones.containsKey(selectedOption)
                 ? dial(optionPhones.get(selectedOption))
