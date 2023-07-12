@@ -13,7 +13,7 @@ public final class Redirect {
 
         VoiceResponse response = new VoiceResponse.Builder()
                 .say(new Say.Builder("Returning to the main menu")
-                        .voice(Say.Voice.ALICE)
+                        .voice(Say.Voice.POLLY_AMY)
                         .language(Say.Language.EN_GB)
                         .build())
                 .redirect(new com.twilio.twiml.voice.Redirect.Builder("/irv/welcome").build())
