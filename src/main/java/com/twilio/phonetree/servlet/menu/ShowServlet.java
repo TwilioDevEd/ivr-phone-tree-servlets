@@ -48,7 +48,7 @@ public class ShowServlet extends HttpServlet {
                         + "the street. Then Left down an alley. Avoid the police cars. Turn left "
                         + "into an unfinished housing development. Fly over the roadblock. Go "
                         + "passed the moon. Soon after you will see your mother ship.")
-                        .voice(Say.Voice.ALICE)
+                        .voice(Say.Voice.POLLY_AMY)
                         .language(Say.Language.EN_GB)
                         .build())
                 .say(new Say.Builder(
@@ -72,7 +72,7 @@ public class ShowServlet extends HttpServlet {
                         "To call the planet Broh doe As O G, press 2. To call the planet "
                         + "DuhGo bah, press 3. To call an oober asteroid to your location"
                         + ", press 4. To go back to the main menu, press the star key ")
-                        .voice(Say.Voice.ALICE)
+                        .voice(Say.Voice.POLLY_AMY)
                         .language(Say.Language.EN_GB)
                         .loop(3)
                         .build()
